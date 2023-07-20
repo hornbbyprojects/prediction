@@ -48,11 +48,14 @@ fn draw_arrow<T: RenderTarget>(canvas: &mut Canvas<T>, x1: i16, y1: i16, x2: i16
         )
         .unwrap();
 }
+const PLAYER_INVINCIBLE_FLICKER_RATE: u64 = 30;
 pub fn draw<T: RenderTarget>(game: &Game, canvas: &mut Canvas<T>, offset_x: i16, offset_y: i16) {
     canvas.set_draw_color((255, 255, 255, 255));
     canvas.clear();
     if let Some(player) = game.player.as_ref() {
         if let Some(player_pos) = game.positions.get(&player.id) {
+            if player.invincibility_until < game.time
+                || game.time % PLAYER_INVINCIBLE_FLICKER_RATE > PLAYER_INVINCIBLE_FLICKER_RATE / 2 {
             canvas
                 .circle(
                     player_pos.x as i16 - offset_x,
@@ -61,6 +64,7 @@ pub fn draw<T: RenderTarget>(game: &Game, canvas: &mut Canvas<T>, offset_x: i16,
                     (0, 0, 255, 255),
                 )
                 .expect("Failed to draw player");
+                }
         }
     }
     for (id, _dasher) in game.dashers.iter() {

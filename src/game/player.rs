@@ -10,6 +10,8 @@ pub struct Player {
     pub down: bool,
     pub dx: f64,
     pub dy: f64,
+    pub invincibility_until: u64,
+    pub lives: u8,
 }
 
 fn sticky_speed(negative: bool, positive: bool, previous: f64) -> f64 {
@@ -24,6 +26,7 @@ fn sticky_speed(negative: bool, positive: bool, previous: f64) -> f64 {
     }
     return 0.0;
 }
+const SPAWN_INVINCIBILITY_TIME: u64 = 300;
 impl Player {
     pub fn new(game: &mut Game, x: f64, y: f64) {
         let id = game.create_game_object(x, y);
@@ -35,6 +38,8 @@ impl Player {
             down: false,
             left: false,
             right: false,
+            invincibility_until: game.time + SPAWN_INVINCIBILITY_TIME,
+            lives: 3,
         };
         game.player = Some(player);
     }

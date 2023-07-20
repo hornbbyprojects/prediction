@@ -73,7 +73,7 @@ impl BuildHasher for GameObjectIdBuildHasher {
 type IdHashMap<V> = HashMap<GameObjectId, V, GameObjectIdBuildHasher>;
 pub struct Game {
     id_counter: u64,
-    time: u64,
+    pub time: u64,
     pub deleted: IdHashMap<()>,
     pub player: Option<Player>,
     pub dangers: IdHashMap<Danger>,

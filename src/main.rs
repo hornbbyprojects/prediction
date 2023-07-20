@@ -142,11 +142,12 @@ fn main() {
                 _ => {}
             }
         }
-        if game.player.is_some() {
+        if let Some(player) = game.player.as_ref() {
             canvas
                 .window_mut()
                 .set_title(&format!(
-                    "PREDICT THEM AND LIVE (score {})",
+                    "PREDICT THEM AND LIVE - {} chances remain (score {})",
+                    player.lives,
                     game.wave_spawner.current_difficulty
                 ))
                 .expect("Could not set title");

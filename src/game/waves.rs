@@ -27,7 +27,7 @@ impl const Mul<i32> for Threat {
 // The higher the minimum threat for a wave, the more of a buffer for "clumping" we will have
 const MINIMUM_THREAT_FOR_WAVE: Threat = Threat(400);
 const WAVE_SPAWN_WIDTH: u32 = 400;
-const MAX_DOWNWARDS_DASHER_WAVE_SIZE: u32 = 20;
+const MAX_DOWNWARDS_DASHER_WAVE_SIZE: u32 = 10;
 const DOWNWARD_DASHER_SPEED: f64 = (1.0 / DASHER_MOVE_FOR as f64) * DASHER_MOVE_EVERY as f64;
 const DOWNWARD_DASHER_THREAT: Threat = Threat(60);
 const THREAT_PER_TICK: Threat = Threat(2);
@@ -102,7 +102,7 @@ pub fn spawn_wave(game: &mut Game) -> Threat {
     return possibilities.last().expect("No wave possibilities").1(game);
 }
 
-const STARTING_DIFFICULTY: u32 = DIFFICULTY_PER_TICK * 1200;
+const STARTING_DIFFICULTY: u32 = DIFFICULTY_PER_TICK * 600;
 pub struct WaveSpawner {
     threat_needed: Threat,
     pub current_difficulty: u32,
