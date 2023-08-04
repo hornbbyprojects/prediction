@@ -8,7 +8,7 @@ use super::{Dasher, Game, DASHER_MOVE_EVERY, DASHER_MOVE_FOR};
 #[derive(Eq, PartialEq, PartialOrd, Ord, Sub, SubAssign, Add, AddAssign)]
 pub struct Threat(i32);
 
-impl const Mul for Threat {
+impl Mul for Threat {
     type Output = Threat;
 
     fn mul(self, rhs: Self) -> Self::Output {
@@ -16,7 +16,7 @@ impl const Mul for Threat {
     }
 }
 
-impl const Mul<i32> for Threat {
+impl Mul<i32> for Threat {
     type Output = Threat;
 
     fn mul(self, rhs: i32) -> Self::Output {
